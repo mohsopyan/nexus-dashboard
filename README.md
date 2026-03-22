@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Nexus Dashboard 🚀
+**The Intelligent Interface for Nexus-Bridge Ecosystem**
 
-## Getting Started
+Nexus Dashboard adalah antarmuka admin berbasis **Next.js 15** yang dirancang untuk mengelola dan memvisualisasikan data dari **Nexus-Bridge** (Hybrid Node.js & Python AI Engine). Proyek ini merupakan bagian dari validasi branding sebagai *Hybrid Backend Engineer*.
 
-First, run the development server:
+## 🛠 Tech Stack
+- **Framework:** Next.js 15 (App Router)
+- **Styling:** Tailwind CSS v4 + Shadcn UI (Radix Nova Style)
+- **Language:** TypeScript
+- **API Client:** Axios with Centralized Interceptors
+- **Icons:** Lucide React
 
+## 🏗 Architecture Note
+Dashboard ini berfungsi sebagai **Consumer** dari API yang disediakan oleh [Nexus-Bridge](https://github.com/mohsopyan/nexus-bridge). Komunikasi dilakukan secara asinkron menggunakan JWT Authentication.
+
+## 🚀 Getting Started
+
+### 1. Prerequisites
+Pastikan **Nexus-Bridge (Backend)** sudah berjalan di port `3000`.
+
+### 2. Environment Setup
+Salin template environment dan sesuaikan konfigurasinya:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cp .env.example .env.local
+```
+Isi ```NEXT_PUBLIC_API_URL``` dengan alamat backend Anda
+
+### 3. Installation
+```bash
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 4. Development
+Jalankan dashboard di port ```3001``` (Untuk menghindari konflik dengan backend):
+```bash
+npm run dev
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 📁 Project Structure
+- **src/app**: Routing dan UI Pages.
+- **src/components**: UI Components (Shadcn & Custom).
+- **src/services**: API Client & Business Logic.
+- **src/lib**: Utilities dan Helper functions.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 🛡 Authentication
+Sistem menggunakan JWT (JSON Web Token). Token disimpan secara aman di ```localStorage``` dan disisipkan secara otomatis ke setiap request melalui Axios Interceptor.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Created with focus on Node.js & Python AI Integration.
