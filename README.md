@@ -45,4 +45,13 @@ npm run dev
 ### 🛡 Authentication
 Sistem menggunakan JWT (JSON Web Token). Token disimpan secara aman di ```localStorage``` dan disisipkan secara otomatis ke setiap request melalui Axios Interceptor.
 
+### 📊 Monitoring Features
+Dashboard ini meneyediakan visualisasi data real-time yang ditarik langsung dari database melalui Nexus-Bridge:
+- **AI Usage Metrics:** Melacak total query dan akumulasi karakter prompt yang di proses oleh AI Engine.
+**User Analytics:** Menampilkan jumlah pengguna terdaftar yang tersinkronisasi dengan database PostgreSQL via Prisma.
+- **System Performance:** Monitoring tren trafik dan latensi sistem (Data-centric visualization).
+
+## 🐳 Docker Integration
+Proyek ini dirancang untuk berjalan secara harmonis dalam ekosistem Docker. Dashboard dikonfigurasi untuk berkomunikasi dengan backend yang terisolasi di dalam container, memastikan konsistensi lingkungan pengembangan dan produksi.
+
 Created with focus on Node.js & Python AI Integration.
