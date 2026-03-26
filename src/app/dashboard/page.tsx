@@ -14,14 +14,17 @@ interface StatCardProps {
   description: string
 }
 
-const data = [
-  { name: "00:00", requests: 400, latency: 120 },
-  { name: "04:00", requests: 300, latency: 110 },
-  { name: "08:00", requests: 900, latency: 180 },
-  { name: "12:00", requests: 1200, latency: 210 },
-  { name: "16:00", requests: 1500, latency: 250 },
-  { name: "20:00", requests: 1100, latency: 190 },
-]
+interface DailyTrendItem {
+    date: string;
+    requests: number;
+    avgLatency: number;
+  }
+
+interface ChartDataPoint {
+  name: string;
+  requests: number;
+  latency: number;
+}
 
 export default function DashboardPage() {
   // 1. Sinkronisasi State dengan JSON Backend
@@ -31,7 +34,7 @@ export default function DashboardPage() {
     total_users: 0,
     dataset_size: 0
   })
-  const [chartData, setChartData] = useState(data)
+  const [chartData, setChartData] = useState<ChartDataPoint[]>([])
   const [user, setUser] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const router = useRouter()
@@ -47,8 +50,17 @@ export default function DashboardPage() {
         
         try {
           const res = await apiClient.get("/api/v1/user/ai-stats")
-          // Mapping data berdasarkan struktur: res.data.stats
+
           setStats(res.data.stats) 
+
+          if (res.data.stats.dailyTrend) {
+            const formatted = res.data.stats.dailyTrend.map((item: DailyTrendItem) => ({
+              name: item.date,
+              requests: item.requests,
+              latency: item.avgLatency
+            }))
+            setChartData(formatted)
+          }
         } catch (e) { 
           console.log("Nomor 1: Sinkronisasi gagal (CORS/Offline), data tetap 0.") 
         }
