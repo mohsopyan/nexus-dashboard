@@ -6,17 +6,19 @@ Nexus Dashboard adalah antarmuka admin berbasis **Next.js 15** yang dirancang un
 ## 🛠 Tech Stack
 - **Framework:** Next.js 15 (App Router)
 - **Styling:** Tailwind CSS v4 + Shadcn UI (Radix Nova Style)
+- **Visualisasi:** Recharts (D3-based)
 - **Language:** TypeScript
 - **API Client:** Axios with Centralized Interceptors
 - **Icons:** Lucide React
 
 ## 🏗 Architecture Note
-Dashboard ini berfungsi sebagai **Consumer** dari API yang disediakan oleh [Nexus-Bridge](https://github.com/mohsopyan/nexus-bridge). Komunikasi dilakukan secara asinkron menggunakan JWT Authentication.
+Dashboard ini berfungsi sebagai **Consumer** dari API yang disediakan oleh [Nexus-Bridge](https://github.com/mohsopyan/nexus-bridge). Komunikasi dilakukan secara asinkron menggunakan JWT Authentication. Sistem ini dirancang untuk memantau performa Python AI Engine melalui Node.js Gateway.
 
 ## 🚀 Getting Started
 
 ### 1. Prerequisites
-Pastikan **Nexus-Bridge (Backend)** sudah berjalan di port `3000`.
+- Pastikan **Nexus-Bridge (Backend)** sudah berjalan di port `3000`.
+- **PostgreSQL** Database aktif dengan data log yang sudah terisi.
 
 ### 2. Environment Setup
 Salin template environment dan sesuaikan konfigurasinya:
@@ -36,6 +38,17 @@ Jalankan dashboard di port ```3001``` (Untuk menghindari konflik dengan backend)
 npm run dev
 ```
 
+### 📊 Core Features
+Dashboard ini menyediakan visualisasi data real-time yang ditarik langsung dari database melalui Nexus-Bridge:
+
+- **AI Usage Metrics:** Melacak total query dan akumulasi karakter prompt yang diproses oleh AI Engine secara agregat.
+
+- **User Analytics:** Menampilkan jumlah pengguna terdaftar yang tersinkronisasi dengan database PostgreSQL via Prisma.
+
+- **Performance Monitoring (Latency):** Visualisasi presisi tinggi menggunakan ```performance.now()``` untuk mengukur Round Trip Time (RTT) antara Node.js Gateway dan Python AI Service.
+
+- **Traffic Trend:** Grafik batang harian yang menunjukkan volume permintaan ke sistem AI.
+
 ### 📁 Project Structure
 - **src/app**: Routing dan UI Pages.
 - **src/components**: UI Components (Shadcn & Custom).
@@ -44,12 +57,6 @@ npm run dev
 
 ### 🛡 Authentication
 Sistem menggunakan JWT (JSON Web Token). Token disimpan secara aman di ```localStorage``` dan disisipkan secara otomatis ke setiap request melalui Axios Interceptor.
-
-### 📊 Monitoring Features
-Dashboard ini meneyediakan visualisasi data real-time yang ditarik langsung dari database melalui Nexus-Bridge:
-- **AI Usage Metrics:** Melacak total query dan akumulasi karakter prompt yang di proses oleh AI Engine.
-**User Analytics:** Menampilkan jumlah pengguna terdaftar yang tersinkronisasi dengan database PostgreSQL via Prisma.
-- **System Performance:** Monitoring tren trafik dan latensi sistem (Data-centric visualization).
 
 ## 🐳 Docker Integration
 Proyek ini dirancang untuk berjalan secara harmonis dalam ekosistem Docker. Dashboard dikonfigurasi untuk berkomunikasi dengan backend yang terisolasi di dalam container, memastikan konsistensi lingkungan pengembangan dan produksi.
